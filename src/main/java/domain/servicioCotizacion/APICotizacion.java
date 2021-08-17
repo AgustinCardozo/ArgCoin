@@ -28,7 +28,7 @@ public class APICotizacion {
                         String result = EntityUtils.toString(entity);
 
                         JSONObject obj = new JSONObject(result);
-                        moneda =new Moneda(obj.getString("fecha"), obj.getString("compra"), obj.getString("venta"));
+                        moneda =new Moneda(1,obj.getString("fecha"), obj.getString("compra"), obj.getString("venta"),0);
                     }
 
                 } finally {
