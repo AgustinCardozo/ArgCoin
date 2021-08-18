@@ -9,14 +9,21 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class APICriptomonedas {
     public static List<Criptomoneda> Get_Criptomonedas() throws IOException {
         List<Criptomoneda> criptomonedas = new ArrayList<Criptomoneda>();
-        String url = "https://api.coincap.io/v2/assets/";
+        FileReader file = new FileReader("API.properties");
+
+        Properties properties = new Properties();
+        properties.load(file);
+        String url = properties.getProperty("UrlCriptomoneda");
+
         CloseableHttpClient httpClient = HttpClients.createDefault();
         try {
             HttpGet request = new HttpGet(url);

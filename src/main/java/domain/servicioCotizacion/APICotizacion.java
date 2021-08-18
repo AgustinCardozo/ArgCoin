@@ -9,12 +9,18 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Properties;
 
 public class APICotizacion {
     public static Moneda Get_Cotizacion() throws IOException {
         Moneda moneda = new Moneda();
-        String url = "https://api-dolar-argentina.herokuapp.com/api/dolaroficial/";
+        FileReader file = new FileReader("API.properties");
+
+        Properties properties = new Properties();
+        properties.load(file);
+        String url = properties.getProperty("UrlCotizacion");
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             try {
