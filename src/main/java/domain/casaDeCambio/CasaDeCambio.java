@@ -6,11 +6,16 @@ import domain.notificacion.NotificacionTarget;
 import domain.servicioCotizacion.*;
 
 import javax.mail.MessagingException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 
 //Hacerlo singleton?
 public class CasaDeCambio {
+    private static CasaDeCambio instancia = null;
     private  int id;
     private String nombre;
     private String mail;
@@ -22,17 +27,30 @@ public class CasaDeCambio {
     private List<Cliente> suscriptores;
     private NotificacionTarget notificacionTarget;
 
-    public CasaDeCambio(String nombre, String mail, String password,String direccion, BilleteraVirtual billetera, List<Cliente> clientes,
-                        List<Moneda> monedas, List<Cliente> suscriptores, NotificacionTarget notificacionTarget){
-        this.nombre = nombre;
-        this.mail = mail;
-        this.password = password;
-        this.direccion = direccion;
+    private CasaDeCambio(BilleteraVirtual billetera, List<Cliente> clientes,
+                        List<Moneda> monedas, List<Cliente> suscriptores, NotificacionTarget notificacionTarget) throws IOException {
+        FileReader file = new FileReader("ArgCoin.properties");
+
+        Properties properties = new Properties();
+        properties.load(file);
+
+        this.nombre = properties.getProperty("nombre");
+        this.mail = properties.getProperty("mail");
+        this.password = properties.getProperty("password");
+        this.direccion = properties.getProperty("direccion");
         this.billetera = billetera;
         this.clientes = clientes;
         this.monedas = monedas;
         this.suscriptores = suscriptores;
         this.notificacionTarget = notificacionTarget;
+    }
+
+    public static CasaDeCambio getInstancia(BilleteraVirtual billetera, List<Cliente> clientes,
+                                            List<Moneda> monedas, List<Cliente> suscriptores, NotificacionTarget notificacionTarget) throws IOException {
+        if(instancia == null){
+            instancia = new CasaDeCambio(billetera, clientes, monedas, suscriptores, notificacionTarget);
+        }
+        return instancia;
     }
 
     public String getMail() {
