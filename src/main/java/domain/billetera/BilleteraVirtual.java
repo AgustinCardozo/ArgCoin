@@ -1,26 +1,32 @@
 package domain.billetera;
 
-import domain.servicioCotizacion.Moneda;
+import domain.servicioCriptomoneda.Criptomoneda;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BilleteraVirtual {
-    private List<Moneda> monedas = new ArrayList<>();
+    private List<Criptomoneda> criptomonedas = new ArrayList<>();
 
     public double saldoTotal() {
-        double saldo = this.monedas.stream().mapToDouble(Moneda::valorMoneda).sum();
+        double saldo = this.criptomonedas.stream().mapToDouble(Criptomoneda::valorMoneda).sum();
         return saldo;
     }
 
-    public boolean adquirirMoneda(Moneda monedaAdquirida) {
-            for (Moneda moneda : monedas) {
+    public boolean adquirirMoneda(Criptomoneda monedaAdquirida) {
+            for (Criptomoneda moneda : criptomonedas) {
                 if (moneda.getId() == (monedaAdquirida.getId())) {
                     moneda.setCantidad(moneda.getCantidad() + monedaAdquirida.getCantidad());
                     return true;
                 }
             }
-            monedas.add(monedaAdquirida);
+            criptomonedas.add(monedaAdquirida);
             return true;
+    }
+
+    public List<Criptomoneda> getCriptomonedas() {
+        return criptomonedas;
     }
 }
 

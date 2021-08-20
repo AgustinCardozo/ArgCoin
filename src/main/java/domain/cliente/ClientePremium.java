@@ -2,13 +2,14 @@ package domain.cliente;
 
 import domain.excepcion.ReferidoExcepcion;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientePremium extends Cliente {
     private List<Cliente> referidos =new ArrayList<>();
 
-    public ClientePremium(int id, String nombre, String apellido, String mail, String direccion) {
+    public ClientePremium(int id, String nombre, String apellido, String mail, String direccion) throws IOException {
         super(id, nombre, apellido, mail, direccion);
     }
 

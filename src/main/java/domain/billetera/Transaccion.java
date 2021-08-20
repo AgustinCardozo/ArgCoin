@@ -7,11 +7,11 @@ public class Transaccion {
     private Cliente origen;
     private Cliente destino;
     private EstadoTransaccion estado;
-    private Moneda moneda;
+    private Cotizacion moneda;
     private  int cantidad;
     private String detalle;
 
-    public Transaccion(Cliente origen, Cliente destino, EstadoTransaccion estado, Moneda moneda, int cantidad, String detalle) {
+    public Transaccion(Cliente origen, Cliente destino, EstadoTransaccion estado, Cotizacion moneda, int cantidad, String detalle) {
         this.origen = origen;
         this.destino = destino;
         this.estado = estado;

@@ -1,6 +1,5 @@
 package domain.servicioCotizacion;
 
-import domain.servicioCriptomoneda.Criptomoneda;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,8 +13,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class APICotizacion {
-    public static Moneda Get_Cotizacion() throws IOException {
-        Moneda moneda = new Moneda();
+    public static Cotizacion Get_Cotizacion() throws IOException {
+        Cotizacion moneda = new Cotizacion();
         FileReader file = new FileReader("API.properties");
 
         Properties properties = new Properties();
@@ -34,7 +33,7 @@ public class APICotizacion {
                         String result = EntityUtils.toString(entity);
 
                         JSONObject obj = new JSONObject(result);
-                        moneda =new Moneda(1,obj.getString("fecha"), obj.getString("compra"), obj.getString("venta"),0);
+                        moneda =new Cotizacion(1,obj.getString("fecha"), obj.getString("compra"), obj.getString("venta"));
                     }
 
                 } finally {
