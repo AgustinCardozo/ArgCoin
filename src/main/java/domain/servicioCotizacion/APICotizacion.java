@@ -13,9 +13,20 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class APICotizacion {
-    public static Cotizacion Get_Cotizacion() throws IOException {
+    private static APICotizacion instancia = null;
+
+    private APICotizacion(){}
+
+    public static APICotizacion getInstance(){
+        if(instancia == null){
+            instancia = new APICotizacion();
+        }
+        return instancia;
+    }
+
+    public Cotizacion Get_Cotizacion() throws IOException {
         Cotizacion moneda = new Cotizacion();
-        FileReader file = new FileReader("API.properties");
+        FileReader file = new FileReader("properties/API.properties");
 
         Properties properties = new Properties();
         properties.load(file);

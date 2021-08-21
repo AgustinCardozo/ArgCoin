@@ -23,7 +23,6 @@ public class Cliente {
     private ClientePremium referido;
     private List<Tarjeta> tarjetas = new ArrayList<>();
     static final float PROPORCION_PUNTOS_ARGCOIN = 0.001f;
-    private double topeDeVenta;
 
     public double calcularPuntosArgCoin(){
         return this.billetera.saldoTotal() * PROPORCION_PUNTOS_ARGCOIN;
@@ -73,10 +72,6 @@ public class Cliente {
 
     public Criptomoneda getCriptomoneda(Criptomoneda criptomoneda){
         return billetera.getCriptomonedas().stream().filter(cripto -> cripto == criptomoneda).collect(Collectors.toList()).get(0);
-    }
-
-    public double getTopeDeVenta() {
-        return topeDeVenta;
     }
 
     public BilleteraVirtual getBilletera() {

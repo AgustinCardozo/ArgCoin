@@ -1,6 +1,8 @@
 package domain.billetera;
 
 import domain.servicioCriptomoneda.Criptomoneda;
+import domain.servicioCriptomoneda.CriptomonedaAdapter;
+import domain.servicioCriptomoneda.ICriptomoneda;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +10,12 @@ import java.util.List;
 
 public class BilleteraVirtual {
     private List<Criptomoneda> criptomonedas = new ArrayList<>();
+    ICriptomoneda iCriptomoneda;
+
+    public BilleteraVirtual() throws IOException {
+        iCriptomoneda = new CriptomonedaAdapter();
+        criptomonedas = iCriptomoneda.obtenerListadoCriptomonedas();
+    }
 
     public double saldoTotal() {
         double saldo = this.criptomonedas.stream().mapToDouble(Criptomoneda::valorMoneda).sum();

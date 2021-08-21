@@ -3,6 +3,7 @@ import domain.servicioCotizacion.*;
 import domain.excepcion.MontoInsuficienteException;
 import domain.servicioCriptomoneda.APICriptomonedas;
 import domain.servicioCriptomoneda.Criptomoneda;
+import domain.servicioCriptomoneda.CriptomonedaAdapter;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class ClienteTest {
             System.out.println("No se puede agregar referido");
         }
         miguel.setCantidadPesos(500000);
-        bitcoin = APICriptomonedas.Get_Criptomonedas().get(0);//new Moneda(1,"16/08","10","8",2);
+        bitcoin = new CriptomonedaAdapter().obtenerListadoCriptomonedas().get(0);//new Moneda(1,"16/08","10","8",2);
     }
 
     @Test

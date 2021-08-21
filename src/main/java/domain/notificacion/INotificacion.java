@@ -5,6 +5,6 @@ import domain.cliente.Cliente;
 
 import javax.mail.MessagingException;
 
-public interface NotificacionTarget {
+public interface INotificacion {
     void enviarMensaje(CasaDeCambio casaDeCambio, Cliente cliente, String mensaje) throws MessagingException;
 }

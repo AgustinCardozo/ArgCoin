@@ -16,9 +16,20 @@ import java.util.List;
 import java.util.Properties;
 
 public class APICriptomonedas {
-    public static List<Criptomoneda> Get_Criptomonedas() throws IOException {
+    private static APICriptomonedas instancia = null;
+
+    private APICriptomonedas(){}
+
+    public static APICriptomonedas getInstance(){
+        if(instancia == null){
+            instancia = new APICriptomonedas();
+        }
+        return instancia;
+    }
+
+    public List<Criptomoneda> Get_Criptomonedas() throws IOException {
         List<Criptomoneda> criptomonedas = new ArrayList<Criptomoneda>();
-        FileReader file = new FileReader("API.properties");
+        FileReader file = new FileReader("properties/API.properties");
 
         Properties properties = new Properties();
         properties.load(file);

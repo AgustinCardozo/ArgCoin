@@ -1,21 +1,25 @@
 package domain.prueba;
 
+import domain.billetera.BilleteraVirtual;
 import domain.servicioCotizacion.APICotizacion;
 import domain.servicioCotizacion.Cotizacion;
+import domain.servicioCotizacion.CotizacionAdapter;
+import domain.servicioCotizacion.ICotizacion;
 import domain.servicioCriptomoneda.APICriptomonedas;
 import domain.servicioCriptomoneda.Criptomoneda;
+import domain.servicioCriptomoneda.CriptomonedaAdapter;
+import domain.servicioCriptomoneda.ICriptomoneda;
 
 import java.io.IOException;
 import java.util.List;
 
 public class TestAPICotizacion {
     public static void main(String[] args) throws IOException {
-        Cotizacion moneda = APICotizacion.Get_Cotizacion();
-        System.out.println(moneda.toString());
+        ICotizacion iCotizacion = new CotizacionAdapter();
+        System.out.println(iCotizacion.obtenerCotizacion().toString());
 
-        List<Criptomoneda> criptomonedas = APICriptomonedas.Get_Criptomonedas();
-        System.out.println("\nValor en peso del bitcoin: "+criptomonedas.get(0).consultarContizacionEnPesos());
-        System.out.println("Valor en dolar del bitcoin: "+criptomonedas.get(0).getPrice());
+        BilleteraVirtual billeteraVirtual = new BilleteraVirtual();
+        System.out.println("\n"+billeteraVirtual.getCriptomonedas().get(0).toString());
 
     }
 }

@@ -2,7 +2,8 @@ package domain.prueba;
 
 import domain.casaDeCambio.CasaDeCambio;
 import domain.cliente.Cliente;
-import domain.notificacion.MailUtil;
+import domain.notificacion.MailAdapter;
+import domain.servicioCotizacion.CotizacionAdapter;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class TestNotificacion {
         List<Cliente> clientes = new ArrayList<Cliente>();
         clientes.add(pepe);
 
-        CasaDeCambio casaDeCambio = CasaDeCambio.getInstancia(null, clientes, null, null, new MailUtil());
+        CasaDeCambio casaDeCambio = new CasaDeCambio(null, clientes, null, null, new MailAdapter(),new CotizacionAdapter());
 
         casaDeCambio.notificar(pepe,mensaje);
     }

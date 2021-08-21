@@ -2,7 +2,7 @@ package domain.casaDeCambio;
 
 import domain.billetera.*;
 import domain.cliente.*;
-import domain.notificacion.NotificacionTarget;
+import domain.notificacion.INotificacion;
 import domain.servicioCotizacion.*;
 
 import javax.mail.MessagingException;
@@ -13,8 +13,7 @@ import java.util.Properties;
 
 
 public class CasaDeCambio {
-    private static CasaDeCambio instancia = null;
-    private  int id;
+    private int id;
     private String nombre;
     private String mail;
     private String password;
@@ -23,11 +22,11 @@ public class CasaDeCambio {
     private List<Cliente> clientes;
     private List<Cotizacion> monedas;
     private List<Cliente> suscriptores;
-    private NotificacionTarget notificacionTarget;
-    private Cotizacion dolarOficial;
+    private INotificacion INotificacion;
+    private ICotizacion dolarOficial;
 
-    private CasaDeCambio(BilleteraVirtual billetera, List<Cliente> clientes,
-                         List<Cotizacion> monedas, List<Cliente> suscriptores, NotificacionTarget notificacionTarget) throws IOException {
+    public CasaDeCambio(BilleteraVirtual billetera, List<Cliente> clientes,
+                        List<Cotizacion> monedas, List<Cliente> suscriptores, INotificacion INotificacion, ICotizacion cotizacion) throws IOException {
         FileReader file = new FileReader("ArgCoin.properties");
 
         Properties properties = new Properties();
@@ -41,16 +40,8 @@ public class CasaDeCambio {
         this.clientes = clientes;
         this.monedas = monedas;
         this.suscriptores = suscriptores;
-        this.notificacionTarget = notificacionTarget;
-        dolarOficial = APICotizacion.Get_Cotizacion();
-    }
-
-    public static CasaDeCambio getInstancia(BilleteraVirtual billetera, List<Cliente> clientes,
-                                            List<Cotizacion> monedas, List<Cliente> suscriptores, NotificacionTarget notificacionTarget) throws IOException {
-        if(instancia == null){
-            instancia = new CasaDeCambio(billetera, clientes, monedas, suscriptores, notificacionTarget);
-        }
-        return instancia;
+        this.INotificacion = INotificacion;
+        dolarOficial = cotizacion;
     }
 
     public String getMail() {
@@ -71,7 +62,7 @@ public class CasaDeCambio {
 
     public void notificar(Cliente cliente, String mensaje) throws MessagingException {
         if(clientes.contains(cliente))
-            notificacionTarget.enviarMensaje(this, cliente,mensaje);
+            INotificacion.enviarMensaje(this, cliente,mensaje);
     }
 
 /*    public List<Cliente> bajaDePrecio(Criptomoneda criptomoneda){

@@ -10,14 +10,13 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MailUtil implements NotificacionTarget{
-
+public class MailAdapter implements INotificacion {
     @Override
     public void enviarMensaje(CasaDeCambio casaDeCambio, Cliente cliente, String mensaje) throws MessagingException {
         System.out.println("Preparando el mail a enviar");
 
         Properties properties = new Properties();
-        this.configureProperties(properties);
+        ConfigureProperties(properties);
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
@@ -26,24 +25,24 @@ public class MailUtil implements NotificacionTarget{
             }
         });
 
-        Message message = prepareMessage(session, cliente, casaDeCambio,mensaje);
+        Message message = PrepareMessage(session, cliente, casaDeCambio,mensaje);
 
         Transport.send(message);
         System.out.println("Mensaje enviado exitosamente");
     }
 
-    private Message prepareMessage(Session session, Cliente cliente, CasaDeCambio casaDeCambio, String msj) {
+    private static Message PrepareMessage(Session session, Cliente cliente, CasaDeCambio casaDeCambio, String msj) {
         try{
             Message message = new MimeMessage(session);
-            this.configureMessage(message, casaDeCambio, cliente,msj);
+            ConfigureMessage(message, casaDeCambio, cliente,msj);
             return message;
         }catch (Exception exception){
-            Logger.getLogger(MailUtil.class.getName()).log(Level.SEVERE,null,exception);
+            Logger.getLogger(MailAdapter.class.getName()).log(Level.SEVERE,null,exception);
         }
         return null;
     }
 
-    public void configureProperties(Properties properties){
+    public static void ConfigureProperties(Properties properties){
         properties.put("mail.smtp.starttls.enable",true);
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
@@ -52,7 +51,7 @@ public class MailUtil implements NotificacionTarget{
         properties.put("mail.smtp.port","587");
     }
 
-    public void configureMessage(Message message, CasaDeCambio casaDeCambio, Cliente cliente, String msj) throws MessagingException {
+    private static void ConfigureMessage(Message message, CasaDeCambio casaDeCambio, Cliente cliente, String msj) throws MessagingException {
         message.setFrom(new InternetAddress(casaDeCambio.getMail()));
         message.setRecipient(Message.RecipientType.TO,new InternetAddress(cliente.getMail()));
         message.setSubject("Mail from Java App");
@@ -61,4 +60,5 @@ public class MailUtil implements NotificacionTarget{
         //message.setContent(htmlCode,"text/html");
         message.setText(msj);
     }
+
 }

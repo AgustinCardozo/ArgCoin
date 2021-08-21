@@ -1,6 +1,8 @@
 package domain.servicioCriptomoneda;
 
 import domain.servicioCotizacion.APICotizacion;
+import domain.servicioCotizacion.CotizacionAdapter;
+import domain.servicioCotizacion.ICotizacion;
 
 import java.io.IOException;
 
@@ -9,7 +11,7 @@ public class Criptomoneda {
     private int rank;
     private String symbol;
     private String priceUsd;
-    //private Moneda cotizacionDolarOficial = APICotizacion.Get_Cotizacion();
+    private ICotizacion cotizacionDolarOficial;
     private int cantidad;
 
     public Criptomoneda(String id, int rank, String symbol, String priceUsd) throws IOException {
@@ -17,7 +19,7 @@ public class Criptomoneda {
         this.rank = rank;
         this.symbol = symbol;
         this.priceUsd = priceUsd;
-        //this.cotizacionDolarOficial = APICotizacion.Get_Cotizacion();
+        this.cotizacionDolarOficial = new CotizacionAdapter();
         this.cantidad = cantidad;
     }
 
@@ -39,7 +41,7 @@ public class Criptomoneda {
     }
 
     public double consultarContizacionEnPesos() throws IOException {
-        double cotizacionOficial = APICotizacion.Get_Cotizacion().getVenta() * this.getPrice();
+        double cotizacionOficial = cotizacionDolarOficial.obtenerCotizacion().getVenta() * this.getPrice();
         return Math.round(cotizacionOficial*100)/100;
     }
 
