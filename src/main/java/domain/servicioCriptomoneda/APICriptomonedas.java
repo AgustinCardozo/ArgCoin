@@ -1,5 +1,6 @@
 package domain.servicioCriptomoneda;
 
+import domain.excepcion.FalloAPICriptoException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -53,13 +54,16 @@ public class APICriptomonedas {
 
                     // Itero sobre la lista de criptomonedas y seteo los correspondientes atributos
                     for (int i = 0; i < currencies.length(); i++) {
-                        JSONObject monedita = (JSONObject)currencies.get(i);
-                        Criptomoneda nuevaMoneda = new Criptomoneda(monedita.getString("id"), monedita.getInt("rank"),monedita.getString("symbol"), monedita.getString("priceUsd"));
+                        JSONObject monedita = (JSONObject) currencies.get(i);
+                        Criptomoneda nuevaMoneda = new Criptomoneda(monedita.getString("id"), monedita.getInt("rank"), monedita.getString("symbol"), monedita.getString("priceUsd"));
                         criptomonedas.add(nuevaMoneda);
                     }
                 }
 
-            } finally {
+            }catch(Exception e){
+                throw new FalloAPICriptoException(e.toString());
+            }
+            finally {
                 response.close();
             }
 

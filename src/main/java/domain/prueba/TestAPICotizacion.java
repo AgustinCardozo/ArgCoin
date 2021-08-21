@@ -18,8 +18,8 @@ public class TestAPICotizacion {
         ICotizacion iCotizacion = new CotizacionAdapter();
         System.out.println(iCotizacion.obtenerCotizacion().toString());
 
-        BilleteraVirtual billeteraVirtual = new BilleteraVirtual();
-        System.out.println("\n"+billeteraVirtual.getCriptomonedas().get(0).toString());
+        //BilleteraVirtual billeteraVirtual = new BilleteraVirtual();
+        //System.out.println("\n"+billeteraVirtual.getCriptomonedas().get(0).toString());
 
     }
 }

@@ -27,7 +27,7 @@ public class CasaDeCambio {
 
     public CasaDeCambio(BilleteraVirtual billetera, List<Cliente> clientes,
                         List<Cotizacion> monedas, List<Cliente> suscriptores, INotificacion INotificacion, ICotizacion cotizacion) throws IOException {
-        FileReader file = new FileReader("ArgCoin.properties");
+        FileReader file = new FileReader("properties/ArgCoin.properties");
 
         Properties properties = new Properties();
         properties.load(file);

@@ -10,7 +10,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MailAdapter implements INotificacion {
+public class Mail implements INotificacion {
     @Override
     public void enviarMensaje(CasaDeCambio casaDeCambio, Cliente cliente, String mensaje) throws MessagingException {
         System.out.println("Preparando el mail a enviar");
@@ -37,7 +37,7 @@ public class MailAdapter implements INotificacion {
             ConfigureMessage(message, casaDeCambio, cliente,msj);
             return message;
         }catch (Exception exception){
-            Logger.getLogger(MailAdapter.class.getName()).log(Level.SEVERE,null,exception);
+            Logger.getLogger(Mail.class.getName()).log(Level.SEVERE,null,exception);
         }
         return null;
     }

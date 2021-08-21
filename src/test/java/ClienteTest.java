@@ -1,4 +1,6 @@
 import domain.cliente.*;
+import domain.formaDePago.Efectivo;
+import domain.formaDePago.TarjetaCredito;
 import domain.servicioCotizacion.*;
 import domain.excepcion.MontoInsuficienteException;
 import domain.servicioCriptomoneda.APICriptomonedas;
@@ -21,9 +23,9 @@ public class ClienteTest {
 
     @BeforeClass
     public static void init() throws IOException {
-        pedro = new ClienteBasico(38403572, "Pedro", "Gomez", "pedro@gmail.com", "Belgrano 222", 12);
-        juana = new ClienteBasico(18909112, "Juana", "Lugones", "j123_lug@gmail.com", "Corrientes 1200", 10);
-        miguel = new ClientePremium(40122333, "Miguel", "Perez", "holamiguel@gmail.com", "Cordoba 222");
+        pedro = new ClienteBasico(38403572, "Pedro", "Gomez", "pedro@gmail.com", "Belgrano 222", 12, new Efectivo());
+        juana = new ClienteBasico(18909112, "Juana", "Lugones", "j123_lug@gmail.com", "Corrientes 1200", 10, new Efectivo());
+        miguel = new ClientePremium(40122333, "Miguel", "Perez", "holamiguel@gmail.com", "Cordoba 222",new Efectivo());
         try{
             miguel.agregarReferido(pedro);
         }catch (Exception e){

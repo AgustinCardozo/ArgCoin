@@ -2,7 +2,8 @@ package domain.cliente;
 
 import domain.billetera.BilleteraVirtual;
 import domain.excepcion.ReferidoExcepcion;
-import domain.servicioCotizacion.*;
+import domain.formaDePago.FormaDePago;
+import domain.formaDePago.TarjetaCredito;
 import domain.excepcion.MontoInsuficienteException;
 import domain.servicioCriptomoneda.Criptomoneda;
 
@@ -21,8 +22,9 @@ public class Cliente {
     public BilleteraVirtual billetera =new BilleteraVirtual();
     private double cantidadPesos;
     private ClientePremium referido;
-    private List<Tarjeta> tarjetas = new ArrayList<>();
+    private List<TarjetaCredito> tarjetaCreditos = new ArrayList<>();
     static final float PROPORCION_PUNTOS_ARGCOIN = 0.001f;
+    private FormaDePago formaDePago;
 
     public double calcularPuntosArgCoin(){
         return this.billetera.saldoTotal() * PROPORCION_PUNTOS_ARGCOIN;
@@ -54,7 +56,7 @@ public class Cliente {
             throw new ReferidoExcepcion();
         }
     }
-    public Cliente(int id, String nombre, String apellido, String mail, String direccion) throws IOException {
+    public Cliente(int id, String nombre, String apellido, String mail, String direccion, FormaDePago formaDePago) throws IOException {
         this.dni = id;
         this.nombre = nombre;
         this.apellido = apellido;
