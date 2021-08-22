@@ -42,7 +42,7 @@ public class ClienteTest {
             System.out.println("No se puede agregar referido");
         }
         miguel.setCantidadPesos(100);
-        bitcoin = new Criptomoneda("1",0,"btc","8");
+        bitcoin = new Criptomoneda("1","0");
     }
 
     @Test

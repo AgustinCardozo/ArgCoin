@@ -8,16 +8,12 @@ import java.io.IOException;
 
 public class Criptomoneda {
     private String id;
-    private int rank;
-    private String symbol;
     private String priceUsd;
     private ICotizacion cotizacionDolarOficial;
     private int cantidad;
 
-    public Criptomoneda(String id, int rank, String symbol, String priceUsd) throws IOException {
+    public Criptomoneda(String id, String priceUsd) throws IOException {
         this.id = id;
-        this.rank = rank;
-        this.symbol = symbol;
         this.priceUsd = priceUsd;
         this.cotizacionDolarOficial = new CotizacionAdapter();
         this.cantidad = cantidad;
@@ -25,14 +21,6 @@ public class Criptomoneda {
 
     public String getId() {
         return id;
-    }
-
-    public int getRank() {
-        return rank;
-    }
-
-    public String getSymbol() {
-        return symbol;
     }
 
     public double getPrice(){
@@ -59,7 +47,6 @@ public class Criptomoneda {
 
     @Override
     public String toString(){
-        return "ID: "+id+"\tRank: "+rank+"\tSymbol: "+symbol
-                +"\tPrice: "+ getPrice();
+        return "ID: "+id +"\tPrice: "+ getPrice();
     }
 }
