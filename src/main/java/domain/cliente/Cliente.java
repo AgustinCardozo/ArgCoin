@@ -20,10 +20,10 @@ public class Cliente {
     private String apellido;
     private String mail;
     private String direccion;
+    private String telefono;
     public BilleteraVirtual billetera =new BilleteraVirtual();
     private double cantidadPesos;
     private ClientePremium referido;
-    private List<TarjetaCredito> tarjetaCreditos = new ArrayList<>();
     static final float PROPORCION_PUNTOS_ARGCOIN = 0.001f;
     private FormaDePago formaDePago;
 
@@ -57,12 +57,13 @@ public class Cliente {
             throw new ReferidoExcepcion();
         }
     }
-    public Cliente(int dni, String nombre, String apellido, String mail, String direccion, FormaDePago formaDePago) throws IOException {
+    public Cliente(int dni, String nombre, String apellido, String mail, String direccion, String telefono,FormaDePago formaDePago) throws IOException {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.direccion = direccion;
+        this.telefono = telefono;
         this.formaDePago=formaDePago;
 
         ClienteMapper oMapper = new ClienteMapper (this.dni,this.nombre, this.apellido, this.mail, this.direccion);

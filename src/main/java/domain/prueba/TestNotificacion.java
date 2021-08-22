@@ -14,12 +14,12 @@ import java.util.List;
 public class TestNotificacion {
     public static void main(String[] args) throws MessagingException, IOException {
         String mensaje = "Esto es un mensaje de prueba";
-        Cliente pepe = new Cliente(1,"Pepe","Argento","agus.cardozo96@gmail.com","Av. Boedo 545", new Efectivo());
+        Cliente pepe = new Cliente(1,"Pepe","Argento","agus.cardozo96@gmail.com","Av. Boedo 545", "48789899",new Efectivo());
 
         List<Cliente> clientes = new ArrayList<Cliente>();
         clientes.add(pepe);
 
-        CasaDeCambio casaDeCambio = new CasaDeCambio(null, clientes, null, null, new Mail(),new CotizacionAdapter());
+        CasaDeCambio casaDeCambio = new CasaDeCambio(clientes,  new Mail(),new CotizacionAdapter());
 
         casaDeCambio.notificar(pepe,mensaje);
     }

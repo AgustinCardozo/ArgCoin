@@ -10,8 +10,8 @@ import java.util.List;
 public class ClientePremium extends Cliente {
     private List<Cliente> referidos =new ArrayList<>();
 
-    public ClientePremium(int id, String nombre, String apellido, String mail, String direccion, FormaDePago formaDePago) throws IOException {
-        super(id, nombre, apellido, mail, direccion, formaDePago);
+    public ClientePremium(int id, String nombre, String apellido, String mail, String direccion, FormaDePago formaDePago, String telefono) throws IOException {
+        super(id, nombre, apellido, mail, direccion, telefono,formaDePago);
     }
 
 

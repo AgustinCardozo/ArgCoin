@@ -54,7 +54,7 @@ public class Mail implements INotificacion {
     private static void ConfigureMessage(Message message, CasaDeCambio casaDeCambio, Cliente cliente, String msj) throws MessagingException {
         message.setFrom(new InternetAddress(casaDeCambio.getMail()));
         message.setRecipient(Message.RecipientType.TO,new InternetAddress(cliente.getMail()));
-        message.setSubject("Mail from Java App");
+        message.setSubject("Mail from ArgCoin");
         //String htmlCode = "<h1> TEST MAIL SEND </h1> <br/> <h2> Example </b></h2>";
         //message.setText("Hey there\n Look my email!");
         //message.setContent(htmlCode,"text/html");

@@ -21,11 +21,11 @@ public class ClienteTest {
 
     @BeforeClass
     public static void init() throws IOException {
-        pepe = new Cliente(11123123,"pepe", "peponio", "pepe@gmail.com", "medrano",new Efectivo());
+        pepe = new Cliente(11123123,"pepe", "peponio", "pepe@gmail.com", "medrano","48888888",new Efectivo());
 
-        pedro = new Cliente( 22123123,"Pedro", "Gomez", "pedro@gmail.com", "Belgrano 222", new Efectivo());
-        juana = new Cliente( 33123123,"Juana", "Lugones", "j123_lug@gmail.com", "Corrientes 1200", new Efectivo());
-        miguel = new ClientePremium(44123123,"Miguel", "Perez", "holamiguel@gmail.com", "Cordoba 222",new Efectivo());
+        pedro = new Cliente( 22123123,"Pedro", "Gomez", "pedro@gmail.com", "Belgrano 222", "59889988",new Efectivo());
+        juana = new Cliente( 33123123,"Juana", "Lugones", "j123_lug@gmail.com", "Corrientes 1200", "48989889",new Efectivo());
+        miguel = new ClientePremium(44123123,"Miguel", "Perez", "holamiguel@gmail.com", "Cordoba 222",new Efectivo(),"48789867");
         try{
             miguel.agregarReferido(pedro);
         }catch (Exception e){
