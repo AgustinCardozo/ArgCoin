@@ -14,6 +14,8 @@ public class ClientePremium extends Cliente {
         super(id, nombre, apellido, mail, direccion, formaDePago);
     }
 
+
+
     public double puntosReferidos(){
         return this.referidos.stream().mapToDouble(Cliente::calcularPuntosArgCoin).sum();
     }

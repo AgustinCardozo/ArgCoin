@@ -9,6 +9,11 @@ public class Cotizacion {
     }*/
     private String compra;
     private String venta;
+
+    public int getId() {
+        return id;
+    }
+
     private int cantidad;
 
     public Cotizacion(){ }

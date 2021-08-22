@@ -1,11 +1,8 @@
 import domain.cliente.*;
 import domain.formaDePago.Efectivo;
-import domain.formaDePago.TarjetaCredito;
 import domain.servicioCotizacion.*;
 import domain.excepcion.MontoInsuficienteException;
-import domain.servicioCriptomoneda.APICriptomonedas;
 import domain.servicioCriptomoneda.Criptomoneda;
-import domain.servicioCriptomoneda.CriptomonedaAdapter;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,12 +17,15 @@ public class ClienteTest {
     static Cliente pedro;
     static Cliente juana;
     static Criptomoneda bitcoin;
+    static Cliente pepe;
 
     @BeforeClass
     public static void init() throws IOException {
-        pedro = new ClienteBasico(38403572, "Pedro", "Gomez", "pedro@gmail.com", "Belgrano 222", 12, new Efectivo());
-        juana = new ClienteBasico(18909112, "Juana", "Lugones", "j123_lug@gmail.com", "Corrientes 1200", 10, new Efectivo());
-        miguel = new ClientePremium(40122333, "Miguel", "Perez", "holamiguel@gmail.com", "Cordoba 222",new Efectivo());
+        pepe = new Cliente(11123123,"pepe", "peponio", "pepe@gmail.com", "medrano",new Efectivo());
+
+        pedro = new Cliente( 22123123,"Pedro", "Gomez", "pedro@gmail.com", "Belgrano 222", new Efectivo());
+        juana = new Cliente( 33123123,"Juana", "Lugones", "j123_lug@gmail.com", "Corrientes 1200", new Efectivo());
+        miguel = new ClientePremium(44123123,"Miguel", "Perez", "holamiguel@gmail.com", "Cordoba 222",new Efectivo());
         try{
             miguel.agregarReferido(pedro);
         }catch (Exception e){
@@ -41,8 +41,8 @@ public class ClienteTest {
         }catch (Exception e){
             System.out.println("No se puede agregar referido");
         }
-        miguel.setCantidadPesos(500000);
-        bitcoin = new CriptomonedaAdapter().obtenerListadoCriptomonedas().get(0);//new Moneda(1,"16/08","10","8",2);
+        miguel.setCantidadPesos(100);
+        bitcoin = new Criptomoneda("1",0,"btc","8");
     }
 
     @Test
@@ -54,13 +54,10 @@ public class ClienteTest {
     public void puntosReferidos() throws IOException {
         Assert.assertEquals((int)miguel.calcularPuntosArgCoin(),22);
     }
-
-
-    //Rompe porque varia continuamente el valor de bitcoin
-    /*@Test
-    public void comprarBitcoin() throws MontoInsuficienteException{
+    @Test
+    public void comprarBitcoin() throws MontoInsuficienteException {
         miguel.comprarMoneda(bitcoin);
-        Assert.assertEquals(miguel.getCantidadPesos(),452974,0);
-    }*/
+        Assert.assertEquals(miguel.getCantidadPesos(),90,0);
+    }
 
 }

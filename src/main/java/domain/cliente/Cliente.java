@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 public class Cliente {
     private int dni;
+    private int id;
     private String nombre;
     private String apellido;
     private String mail;
@@ -34,7 +35,7 @@ public class Cliente {
         return cantidadPesos;
     }
 
-    public void comprarMoneda(Criptomoneda moneda) throws MontoInsuficienteException, IOException {
+    public void comprarMoneda(Criptomoneda moneda) throws MontoInsuficienteException {
 
         if(moneda.valorMoneda()<=this.getCantidadPesos()){
             this.setCantidadPesos(this.getCantidadPesos() - moneda.getPrice());
@@ -56,12 +57,16 @@ public class Cliente {
             throw new ReferidoExcepcion();
         }
     }
-    public Cliente(int id, String nombre, String apellido, String mail, String direccion, FormaDePago formaDePago) throws IOException {
-        this.dni = id;
+    public Cliente(int dni, String nombre, String apellido, String mail, String direccion, FormaDePago formaDePago) throws IOException {
+        this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.direccion = direccion;
+        this.formaDePago=formaDePago;
+
+        ClienteMapper oMapper = new ClienteMapper (this.dni,this.nombre, this.apellido, this.mail, this.direccion);
+        this.id= oMapper.insert();
     }
 
     public String getMail() {
@@ -78,6 +83,10 @@ public class Cliente {
 
     public BilleteraVirtual getBilletera() {
         return billetera;
+    }
+
+    public int getId() {
+        return id;
     }
 }
 
