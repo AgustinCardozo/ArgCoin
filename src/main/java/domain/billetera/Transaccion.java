@@ -11,6 +11,10 @@ public class Transaccion {
     private  int cantidad;
     private String detalle;
 
+    public void setEstado(EstadoTransaccion estado) {
+        this.estado = estado;
+    }
+
     public Transaccion(Cliente origen, Cliente destino, EstadoTransaccion estado, Cotizacion cotizacion, int cantidad, String detalle) {
         this.origen = origen;
         this.destino = destino;

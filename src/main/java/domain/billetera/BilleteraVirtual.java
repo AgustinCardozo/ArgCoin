@@ -33,6 +33,16 @@ public class BilleteraVirtual {
             return true;
     }
 
+    public boolean venderMoneda(Criptomoneda monedaAVender, int cantidad){
+        for(Criptomoneda moneda : criptomonedas){
+            if (moneda.getId() == (monedaAVender.getId())){
+                moneda.setCantidad(moneda.getCantidad() - cantidad);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Criptomoneda> getCriptomonedas() {
         return criptomonedas;
     }

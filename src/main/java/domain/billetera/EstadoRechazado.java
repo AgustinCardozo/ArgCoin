@@ -1,17 +1,19 @@
 package domain.billetera;
 
-public class EstadoPendiente implements EstadoTransaccion{
+public class EstadoRechazado implements EstadoTransaccion {
 
+    public void reintentarOperacion() {
+
+    }
 
     @Override
     public void imprimirDetalle() {
-        System.out.println("La transacción está pendiente");
+        System.out.println("La transacción se rechazó");
     }
 
     @Override
     public void cancelarOperacion(Transaccion transaccion) {
-        transaccion.setEstado(new EstadoRechazado());
-
+        System.out.println("La transacción ya se encuentra rechazada");
     }
 
     @Override

@@ -45,6 +45,10 @@ public class Cliente {
         }
     }
 
+    public void venderMoneda(Criptomoneda moneda, int cantidad) throws MontoInsuficienteException {
+
+    }
+
     public void setCantidadPesos(double cantidadPesos) {
         this.cantidadPesos = cantidadPesos;
     }
