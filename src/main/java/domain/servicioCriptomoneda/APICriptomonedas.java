@@ -55,7 +55,7 @@ public class APICriptomonedas {
                     // Itero sobre la lista de criptomonedas y seteo los correspondientes atributos
                     for (int i = 0; i < currencies.length(); i++) {
                         JSONObject monedita = (JSONObject) currencies.get(i);
-                        Criptomoneda nuevaMoneda = new Criptomoneda(monedita.getString("id"), monedita.getString("priceUsd"));
+                        Criptomoneda nuevaMoneda = new Criptomoneda(monedita.getString("id"), monedita.getString("priceUsd"), 0);
                         criptomonedas.add(nuevaMoneda);
                     }
                 }

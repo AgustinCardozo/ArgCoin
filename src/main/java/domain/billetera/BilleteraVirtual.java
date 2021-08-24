@@ -24,7 +24,7 @@ public class BilleteraVirtual {
 
     public boolean adquirirMoneda(Criptomoneda monedaAdquirida) {
             for (Criptomoneda moneda : criptomonedas) {
-                if (moneda.getId() == (monedaAdquirida.getId())) {
+                if (moneda.getId().equals(monedaAdquirida.getId())) {
                     moneda.setCantidad(moneda.getCantidad() + monedaAdquirida.getCantidad());
                     return true;
                 }
@@ -33,9 +33,19 @@ public class BilleteraVirtual {
             return true;
     }
 
-    public boolean venderMoneda(Criptomoneda monedaAVender, int cantidad){
+    public boolean venderMoneda(Criptomoneda monedaAVender, double cantidad){
         for(Criptomoneda moneda : criptomonedas){
             if (moneda.getId() == (monedaAVender.getId())){
+                moneda.setCantidad(moneda.getCantidad() - cantidad);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean transferirMoneda(Criptomoneda monedaAVender, double cantidad){
+        for(Criptomoneda moneda : criptomonedas){
+            if (moneda.getId().equals(monedaAVender.getId())){
                 moneda.setCantidad(moneda.getCantidad() - cantidad);
                 return true;
             }

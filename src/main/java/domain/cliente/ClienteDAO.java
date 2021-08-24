@@ -9,7 +9,7 @@ public class ClienteDAO {
         Connection conn = null;
 
         try {
-            String connectionUrl = "jdbc:mysql://localhost:3308/argcoin";
+            String connectionUrl = "jdbc:mysql://localhost:3308/argcoin_base";
             conn = DriverManager.getConnection(connectionUrl, "root", "");
             System.out.println("Conexion realizada");
             return conn;

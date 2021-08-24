@@ -1,11 +1,13 @@
 package domain.cliente;
 
-import domain.billetera.BilleteraVirtual;
+import domain.billetera.*;
 import domain.excepcion.ReferidoExcepcion;
 import domain.formaDePago.FormaDePago;
 import domain.formaDePago.TarjetaCredito;
 import domain.excepcion.MontoInsuficienteException;
+import domain.servicioCotizacion.Cotizacion;
 import domain.servicioCriptomoneda.Criptomoneda;
+import org.omg.PortableInterceptor.ClientRequestInfoOperations;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class Cliente {
     private String direccion;
     private String telefono;
     public BilleteraVirtual billetera =new BilleteraVirtual();
+    private List<Transaccion> transacciones= new ArrayList<>();
     private double cantidadPesos;
     private ClientePremium referido;
     static final float PROPORCION_PUNTOS_ARGCOIN = 0.001f;
@@ -46,9 +49,32 @@ public class Cliente {
     }
 
     public void venderMoneda(Criptomoneda moneda, int cantidad) throws MontoInsuficienteException {
+        if(this.billetera.venderMoneda(moneda,cantidad)) {
+            this.setCantidadPesos(this.getCantidadPesos() + moneda.getPrice());
+        }else{
+            throw new MontoInsuficienteException();
+        }
 
     }
 
+    public boolean recibirTransferencia(Criptomoneda moneda){
+        this.billetera.adquirirMoneda(moneda);
+        return true;
+
+    }
+    public boolean transferirMoneda(Criptomoneda moneda, double cantidad, Cliente destino, String detalle) throws MontoInsuficienteException{
+        Transaccion registro = new Transaccion(this, destino, new EstadoPendiente(),moneda.getId(),cantidad, detalle);
+        transacciones.add(registro);
+        if(this.billetera.transferirMoneda(moneda,cantidad)){
+            destino.recibirTransferencia(moneda);
+            registro.setEstado(new EstadoEfectuado());
+            return true;
+        }else{
+            registro.setEstado(new EstadoRechazado());
+            throw new MontoInsuficienteException();
+        }
+
+    }
     public void setCantidadPesos(double cantidadPesos) {
         this.cantidadPesos = cantidadPesos;
     }

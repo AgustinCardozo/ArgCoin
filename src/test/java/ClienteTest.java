@@ -17,6 +17,7 @@ public class ClienteTest {
     static Cliente pedro;
     static Cliente juana;
     static Criptomoneda bitcoin;
+    static Criptomoneda ethereum;
     static Cliente pepe;
 
     @BeforeClass
@@ -41,8 +42,9 @@ public class ClienteTest {
         }catch (Exception e){
             System.out.println("No se puede agregar referido");
         }
-        miguel.setCantidadPesos(100);
-        bitcoin = new Criptomoneda("1","0");
+        miguel.setCantidadPesos(10000);
+        bitcoin = new Criptomoneda("bitcoin","100",100);
+        ethereum = new Criptomoneda("1","1",1);
     }
 
     @Test
@@ -58,6 +60,10 @@ public class ClienteTest {
     public void comprarBitcoin() throws MontoInsuficienteException {
         miguel.comprarMoneda(bitcoin);
         Assert.assertEquals(miguel.getCantidadPesos(),90,0);
+    }
+    @Test
+    public void transferirMonedas() throws MontoInsuficienteException{
+    miguel.transferirMoneda(bitcoin,0.1,pedro,"Devolucion deuda");
     }
 
 }

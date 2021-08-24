@@ -10,9 +10,9 @@ public class Criptomoneda {
     private String id;
     private String priceUsd;
     private ICotizacion cotizacionDolarOficial;
-    private int cantidad;
+    private double cantidad;
 
-    public Criptomoneda(String id, String priceUsd) throws IOException {
+    public Criptomoneda(String id, String priceUsd, int cantidad) throws IOException {
         this.id = id;
         this.priceUsd = priceUsd;
         this.cotizacionDolarOficial = new CotizacionAdapter();
@@ -33,11 +33,11 @@ public class Criptomoneda {
         return Math.round(cotizacionOficial*100)/100;
     }
 
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 

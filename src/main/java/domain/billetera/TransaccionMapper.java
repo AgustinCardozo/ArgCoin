@@ -8,11 +8,11 @@ public class TransaccionMapper {
     private Cliente origen;
     private Cliente destino;
     private EstadoTransaccion estado;
-    private int moneda;
+    private String moneda;
     private  double cantidad;
     private String detalle;
 
-    public TransaccionMapper(Cliente origen, Cliente destino, EstadoTransaccion estado, int moneda, double cantidad, String detalle){
+    public TransaccionMapper(Cliente origen, Cliente destino, EstadoTransaccion estado, String moneda, double cantidad, String detalle){
         this.origen = origen;
         this.destino = destino;
         this.estado = estado;
@@ -21,7 +21,6 @@ public class TransaccionMapper {
         this.detalle = detalle;
 
     }
-
 
     public int insert() {
         TransaccionDAO transaccionDAO = new TransaccionDAO();
