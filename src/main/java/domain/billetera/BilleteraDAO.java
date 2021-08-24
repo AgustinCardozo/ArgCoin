@@ -1,15 +1,15 @@
-package domain.cliente;
+package domain.billetera;
 
 import java.sql.*;
 
-public class ClienteDAO {
+public class BilleteraDAO {
     private Connection conn;
 
     public Connection newConnection() {
         Connection conn = null;
 
         try {
-            String connectionUrl = "jdbc:mysql://localhost:3308/argcoin_base";
+            String connectionUrl = "jdbc:mysql://localhost:3308/argcoin";
             conn = DriverManager.getConnection(connectionUrl, "root", "");
             System.out.println("Conexion realizada");
             return conn;
@@ -21,8 +21,9 @@ public class ClienteDAO {
         }
     }
 
-    public int insert(int dni,String nombre, String apellido, String mail, String direccion) {
-        String consulta = "INSERT INTO cliente (idcliente,dni,nombre, apellido, mail, direccion) VALUES ('"+ dni + "' ,'"+ dni + "' ,'"+ nombre +"' ,'"+ apellido +"','" + mail +"','"+ direccion +"');";
+    public int insert(int iddni) {
+        System.out.println(iddni);
+        String consulta = "INSERT INTO billeteravirtual (idbilleteravirtual, cliente_idcliente) VALUES ('"+ iddni +"' ,'"+ iddni +"');";
 
         try {
             this.conn = this.newConnection();
@@ -35,5 +36,4 @@ public class ClienteDAO {
             return 0;
         }
     }
-
 }

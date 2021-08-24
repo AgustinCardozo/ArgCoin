@@ -23,7 +23,7 @@ public class Cliente {
     private String mail;
     private String direccion;
     private String telefono;
-    public BilleteraVirtual billetera =new BilleteraVirtual();
+    public BilleteraVirtual billetera;
     private List<Transaccion> transacciones= new ArrayList<>();
     private double cantidadPesos;
     private ClientePremium referido;
@@ -41,7 +41,7 @@ public class Cliente {
     public void comprarMoneda(Criptomoneda moneda) throws MontoInsuficienteException {
 
         if(moneda.valorMoneda()<=this.getCantidadPesos()){
-            this.setCantidadPesos(this.getCantidadPesos() - moneda.getPrice());
+            this.setCantidadPesos(this.getCantidadPesos() - moneda.valorMoneda());
             this.billetera.adquirirMoneda(moneda);
         }else{
             throw new MontoInsuficienteException();
@@ -63,7 +63,7 @@ public class Cliente {
 
     }
     public boolean transferirMoneda(Criptomoneda moneda, double cantidad, Cliente destino, String detalle) throws MontoInsuficienteException{
-        Transaccion registro = new Transaccion(this, destino, new EstadoPendiente(),moneda.getId(),cantidad, detalle);
+        Transaccion registro = new Transaccion(this, destino, new EstadoPendiente(),moneda,cantidad, detalle);
         transacciones.add(registro);
         if(this.billetera.transferirMoneda(moneda,cantidad)){
             destino.recibirTransferencia(moneda);
@@ -96,8 +96,12 @@ public class Cliente {
         this.telefono = telefono;
         this.formaDePago=formaDePago;
 
+
         ClienteMapper oMapper = new ClienteMapper (this.dni,this.nombre, this.apellido, this.mail, this.direccion);
         this.id= oMapper.insert();
+
+        this.billetera= new BilleteraVirtual(this);
+
     }
 
     public String getMail() {
@@ -117,7 +121,7 @@ public class Cliente {
     }
 
     public int getId() {
-        return id;
+        return dni;
     }
 }
 

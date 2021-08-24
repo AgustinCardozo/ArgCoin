@@ -1,10 +1,9 @@
 package domain.billetera;
 
+import domain.excepcion.MontoInsuficienteException;
+
 public class EstadoRechazado implements EstadoTransaccion {
 
-    public void reintentarOperacion() {
-
-    }
 
     @Override
     public void imprimirDetalle() {
@@ -17,7 +16,7 @@ public class EstadoRechazado implements EstadoTransaccion {
     }
 
     @Override
-    public void repetirOperacion(Transaccion transaccion) {
-
+    public void repetirOperacion(Transaccion transaccion) throws MontoInsuficienteException {
+        transaccion.getOrigen().transferirMoneda(transaccion.getMoneda(), transaccion.getCantidad(), transaccion.getDestino(), transaccion.getDetalle());
     }
 }

@@ -1,5 +1,7 @@
 package domain.billetera;
 
+import domain.cliente.Cliente;
+import domain.cliente.ClienteMapper;
 import domain.servicioCriptomoneda.Criptomoneda;
 import domain.servicioCriptomoneda.CriptomonedaAdapter;
 import domain.servicioCriptomoneda.ICriptomoneda;
@@ -12,9 +14,12 @@ public class BilleteraVirtual {
     private List<Criptomoneda> criptomonedas = new ArrayList<>();
     ICriptomoneda iCriptomoneda;
 
-    public BilleteraVirtual() throws IOException {
+    public BilleteraVirtual(Cliente cliente) throws IOException {
         iCriptomoneda = new CriptomonedaAdapter();
         criptomonedas = iCriptomoneda.obtenerListadoCriptomonedas();
+        System.out.println(cliente.getId());
+        BilleteraMapper oMapper = new BilleteraMapper (cliente.getId());
+        oMapper.insert();
     }
 
     public double saldoTotal() {
@@ -46,6 +51,8 @@ public class BilleteraVirtual {
     public boolean transferirMoneda(Criptomoneda monedaAVender, double cantidad){
         for(Criptomoneda moneda : criptomonedas){
             if (moneda.getId().equals(monedaAVender.getId())){
+                System.out.println(moneda.getId());
+                System.out.println(monedaAVender.getId());
                 moneda.setCantidad(moneda.getCantidad() - cantidad);
                 return true;
             }

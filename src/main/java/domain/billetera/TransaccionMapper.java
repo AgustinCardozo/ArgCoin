@@ -24,6 +24,6 @@ public class TransaccionMapper {
 
     public int insert() {
         TransaccionDAO transaccionDAO = new TransaccionDAO();
-       return transaccionDAO.insert(this.origen.getId(),this.destino.getId(),this.moneda,this.cantidad);
+       return transaccionDAO.insert(this.origen.getId(),this.destino.getId(),this.moneda,this.cantidad, this.detalle);
     }
 }

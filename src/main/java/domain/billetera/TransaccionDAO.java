@@ -21,8 +21,8 @@ public class TransaccionDAO {
         }
     }
 
-    public int insert(int idOrigen, int idDestino, String monedaId, double cantidad) {
-        String consulta = "INSERT INTO cliente (idOrigen, idDestino, cotizacion, cantidad) VALUES ('"+ idOrigen +"' ,'"+ idDestino +"','" + monedaId +"','"+ cantidad +"');";
+    public int insert(int idOrigen, int idDestino, String monedaId, double cantidad, String detalle) {
+        String consulta = "INSERT INTO transaccion (origen, destino, cantidad, detalle) VALUES ('"+ idOrigen +"' ,'"+ idDestino +"','" + cantidad +"','"+ detalle +"');";
 
         try {
             this.conn = this.newConnection();
